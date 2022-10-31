@@ -3,7 +3,12 @@ const app = express()
 const mongoose = require('mongoose')
 const {MONGOURI} = require('./keys')
 
-mongoose.connect(MONGOURI)
+require('./models/User')
+
+mongoose.connect(MONGOURI,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 mongoose.connection.on('connected', ()=>{
     console.log('Connected to Mongo!')
 })
