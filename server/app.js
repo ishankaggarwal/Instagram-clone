@@ -1,5 +1,16 @@
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
+const {MONGOURI} = require('./keys')
+
+mongoose.connect(MONGOURI)
+mongoose.connection.on('connected', ()=>{
+    console.log('Connected to Mongo!')
+})
+mongoose.connection.on('error', (err)=>{
+    console.log('Error connecting to Mongo,err')
+})
+
 const PORT = 4000
 
 app.get('/',(req,res) => {
